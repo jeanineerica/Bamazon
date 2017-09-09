@@ -22,12 +22,12 @@ connection.connect(function(err) {
     //prints the items for sale and their details
     connection.query('SELECT * FROM Products', function(err, res){
       if(err) throw err;
-    
+
       for(var i = 0; i<res.length;i++){
         console.log("ID: " + res[i].ItemID + " || " + "Product: " + res[i].ProductName + " || " + "Department: " + res[i].DepartmentName + " || " + "Price: " + res[i].Price + " || " + "QTY: " + res[i].StockQuantity);
 
       }
-    
+
       console.log(' ');
       inquirer.prompt([
         {
@@ -58,7 +58,7 @@ connection.connect(function(err) {
           var whatToBuy = (ans.id)-1;
           var howMuchToBuy = parseInt(ans.qty);
           var grandTotal = parseFloat(((res[whatToBuy].Price)*howMuchToBuy).toFixed(2));
-    
+
           //check if quantity is sufficient
           if(res[whatToBuy].StockQuantity >= howMuchToBuy){
             //after purchase, updates quantity in Products
@@ -69,35 +69,18 @@ connection.connect(function(err) {
                 if(err) throw err;
                 console.log("Your total is $" + grandTotal.toFixed(2) + ". Your item(s) will be air dropped to you in 2-5 hours.");
             });
-    
-            connection.query("SELECT * FROM Departments", function(err, deptRes){
-              if(err) throw err;
-              var index;
-              for(var i = 0; i < deptRes.length; i++){
-                if(deptRes[i].DepartmentName === res[whatToBuy].DepartmentName){
-                  index = i;
-                }
-              }
-              
-              //updates totalSales in departments table
-              connection.query("UPDATE Departments SET ? WHERE ?", [
-              {TotalSales: deptRes[index].TotalSales + grandTotal},
-              {DepartmentName: res[whatToBuy].DepartmentName}
-              ], function(err, deptRes){
-                  if(err) throw err;
-            
-              });
-            });
-    
+
+
+
           } else{
             console.log("Sorry, there's not enough in stock");
           }
-    
+
           reprompt();
         })
     })
     }
-    
+
     //asks if they would like to purchase another item
     function reprompt(){
       inquirer.prompt([{
@@ -112,5 +95,3 @@ connection.connect(function(err) {
         }
       });
     }
-    
-   
