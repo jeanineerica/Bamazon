@@ -13,12 +13,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jeanineerica/Bamazon.git"
+    "url": "git+https://github.com/jeanineerica/bamazon.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/jeanineerica/Bamazon/issues"
+    "url": "https://github.com/jeanineerica/bamazon/issues"
   },
-  "homepage": "https://github.com/jeanineerica/Bamazon#readme"
+  "homepage": "https://github.com/jeanineerica/bamazon#readme"
 }
